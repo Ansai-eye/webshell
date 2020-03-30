@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+process.env.NODE_ENV = 'production';
+const http = require('http');
+const args = require('args');
+const app = require('../app');
+const createSocketServer = require('../socket/index');
+
+args.option('port', 'The port on which the app will be running', 3000);
+const flags = args.parse(process.argv);
+let port = flags.port;
+
+app.set('port', port);
+
+let server = http.createServer(app);
+
+createSocketServer(server);
+
+server.listen(port);
+server.on('error', onError);
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
