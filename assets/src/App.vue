@@ -10,15 +10,15 @@
     <div class="header">
       <span>终端</span>
       <ul class="menu-list">
-        <li>
-          <el-input class="upload-demo" v-model="input" @change="handleInputChange"></el-input>
-        </li>
         <!-- <li>
+          <el-input class="upload-demo" v-model="input" @change="handleInputChange"></el-input>
+        </li> -->
+        <li>
           <el-upload class="upload-demo" action="api/upload" :on-success="handleUploadSuccess">
             <el-button class="upload-btn" type="primary">上传执行脚本</el-button>
           </el-upload>
-        </li> -->
-        <!-- <li class="active">
+        </li>
+        <li class="active">
           <select
             class="terminal-select"
             v-model="currentTab"
@@ -28,7 +28,7 @@
           </select>
         </li>
         <li class="el-icon-plus" @click="handlePlus"></li>
-        <li class="el-icon-delete" @click="handleDelete"></li> -->
+        <li class="el-icon-delete" @click="handleDelete"></li>
       </ul>
     </div>
     <div id="xterm-wrapper">
